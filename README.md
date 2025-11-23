@@ -74,7 +74,7 @@ All configuration modifications are backed up with versioned suffixes.
 
 # **Performance Results**
 
-All performance comparison graphs are available in the **results/** folder.
+All performance comparison graphs are also available in the **results/** folder.
 The tables below summarize real-world measured improvements before and after applying EdgePulse on Raspberry Pi 3B+, Pi 4, and Pi 5.
 
 ---
@@ -126,6 +126,106 @@ The tables below summarize real-world measured improvements before and after app
 <img width="500" height="300" alt="perf_drone" src="https://github.com/user-attachments/assets/5a51c67f-833f-4965-9676-041d895ba76f" />
 
 ---
+
+
+# Advanced Engineering Notes
+
+## Hardware & Platform Compatibility Matrix
+
+EdgePulse is tested and validated across multiple Raspberry Pi generations. Each board behaves differently due to variations in RAM size, CPU architecture, thermal envelope, GPU driver behavior, and kernel tuning.
+
+### Platform Compatibility Overview
+
+| Device | RAM | Architecture | Recommended ZRAM % | Expected Behavior | Notes |
+|-------|-----|--------------|--------------------|------------------|-------|
+| Raspberry Pi 3B+ | 1 GB LPDDR2 | ARMv8 (aarch64) | 60% | Best stability improvement; prevents OOM in AI/ML | Limited RAM requires aggressive ZRAM; thermals sensitive; use a fan. |
+| Raspberry Pi 4 (2/4/8 GB) | LPDDR4 | ARMv8 (aarch64) | 40% | Excellent ML and robotics performance | Benefits from active cooling and tuned swap fallback. |
+| Raspberry Pi 5 (4/8 GB) | LPDDR4X | ARMv8.2 | 30% | Highest stability and compute headroom | SSD swap recommended; strongest thermal performance. |
+
+### Kernel Compatibility
+
+| Kernel Version | Status | Notes |
+|----------------|--------|-------|
+| 6.x Raspberry Pi Kernel | Fully supported | VC4/VC6 thermal zones fully read; cpufreq stable |
+| Debian Bookworm AArch64 | Fully supported | API + sysbench + ZRAM compatible |
+| Ubuntu Server | Expected to work | Install zram-tools manually |
+
+## Documented Field Failures and How EdgePulse Prevents Them
+
+### AI/ML Real-Time Inference Crashes (OOM-induced)
+Running YOLOv5n/TFLite on Pi 3B+ caused OOM kills when Python loaded models + camera buffers. EdgePulse uses ZRAM + fallback swap to absorb bursts and prevent crashes.
+
+### IoT Gateway Sensor Burst Overload
+Multi-sensor + MQTT telemetry caused freeze/stalls. EdgePulse’s swap tuning and cache-pressure configuration removed jitter and increased uptime to 99%.
+
+### Robotics Control Loop Drops
+Robotics navigation loop dropped from 20 Hz to 8 Hz under thermal load. With throttling detection + stable memory, EdgePulse maintained 30–45 Hz loop rate.
+
+### Drone Compute Stalls Mid-Flight
+Video encode + detection froze mid-flight. EdgePulse eliminated stalls and improved thermal predictability.
+
+## Monitoring & Integration Interfaces
+
+### Prometheus Integration
+Example exporter:
+
+```
+curl -s http://<pi-ip>:8080/perf | jq -r '
+  "edgepulse_temperature_c " + (.temperature | capture("temp=(?<t>[0-9.]+)") | .t)
+'
+```
+
+### MQTT Alerts Example
+```
+perf=$(curl -s http://<pi-ip>:8080/perf)
+throttle=$(echo "$perf" | jq -r '.throttled')
+mosquitto_pub -t edgepulse/alerts/throttle -m "$throttle"
+```
+
+### Grafana Dashboard
+Metrics available: CPU, temp, swap, sysbench, throttling.
+
+## Diagnostics API Schema (v1.0)
+
+| Field | Description | Units |
+|-------|-------------|-------|
+| timestamp | UTC timestamp | ISO-8601 |
+| host | Hostname | string |
+| kernel | Kernel + arch | string |
+| model | HW model | string |
+| total_ram_mb | RAM | MB |
+| cpu_freqs | Per-core freq | kHz |
+| temperature | Board temp | C |
+| throttled | Bitmask | hex |
+| zram_raw | zramctl | text |
+| swap_raw | swapon | text |
+| sysbench | sysbench output | text |
+| free_raw | free -h | text |
+
+## Security & Reliability Considerations
+
+### API Security
+Use firewall, LAN-only exposure, or reverse proxy auth. Future versions may include tokens.
+
+### Rollback Safety
+Rollback restores original configs, validates UUID of swapfile, cleans API, and resets sysctl.
+
+## Edge-Case Behavior & Recommendations
+
+### Heavy Disk Swap Use
+May slow due to SD limitations. SSD strongly recommended.
+
+### Thermal Thresholds
+
+| Board | Throttle Temp |
+|-------|----------------|
+| Pi 3B+ | ~70C |
+| Pi 4 | ~75-80C |
+| Pi 5 | ~85C |
+
+### USB/SSD Swap Fallback
+Use with installer modifications for improved swap throughput.
+
 
 ## Installation
 
