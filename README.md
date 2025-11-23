@@ -85,9 +85,9 @@ The tables below summarize real-world measured improvements before and after app
 | -------------------- | ---------- | --------- | ----------- |
 | **Raspberry Pi 3B+** | 2          | 4         | +100%       |
 | **Raspberry Pi 4**   | 8          | 12        | +50%        |
-| **Raspberry Pi 5**   | 18         | 25        | +38%        |
+| **Raspberry Pi 5**   | 18         | 25        | +38%        |   
 
-<img width="2000" height="1200" alt="perf_ai_ml" src="https://github.com/user-attachments/assets/1e5e4bd3-2f28-478f-8b0b-bdf3e9d32470" />
+<img width="500" height="300" alt="perf_ai_ml" src="https://github.com/user-attachments/assets/1e5e4bd3-2f28-478f-8b0b-bdf3e9d32470" />
 
 ---
 
@@ -99,7 +99,7 @@ The tables below summarize real-world measured improvements before and after app
 | **Raspberry Pi 4**   | 88%           | 99.7%        | +11.7%      |
 | **Raspberry Pi 5**   | 92%           | 99.9%        | +7.9%       |
 
-<img width="2000" height="1200" alt="perf_iot" src="https://github.com/user-attachments/assets/54441c18-adda-4508-bdb3-3f0a0fdae6d8" />
+<img width="500" height="300" alt="perf_iot" src="https://github.com/user-attachments/assets/54441c18-adda-4508-bdb3-3f0a0fdae6d8" />
 
 ---
 
@@ -111,7 +111,7 @@ The tables below summarize real-world measured improvements before and after app
 | **Raspberry Pi 4**   | 25 Hz            | 45 Hz           | +80%        |
 | **Raspberry Pi 5**   | 40 Hz            | 60 Hz           | +50%        |
 
-<img width="2000" height="1200" alt="perf_robotics" src="https://github.com/user-attachments/assets/3e49b742-8a2d-4721-8975-987be8c8273f" />
+<img width="500" height="300" alt="perf_robotics" src="https://github.com/user-attachments/assets/3e49b742-8a2d-4721-8975-987be8c8273f" />
 
 ---
 
@@ -123,7 +123,7 @@ The tables below summarize real-world measured improvements before and after app
 | **Raspberry Pi 4**   | 1             | 0            | Eliminated   |
 | **Raspberry Pi 5**   | 0             | 0            | Fully stable |
 
-<img width="2000" height="1200" alt="perf_drone" src="https://github.com/user-attachments/assets/5a51c67f-833f-4965-9676-041d895ba76f" />
+<img width="500" height="300" alt="perf_drone" src="https://github.com/user-attachments/assets/5a51c67f-833f-4965-9676-041d895ba76f" />
 
 ---
 
@@ -282,6 +282,7 @@ Released under the MIT License.
 Refer to `LICENSE` for details.
 
 ---
+
 
 
 
