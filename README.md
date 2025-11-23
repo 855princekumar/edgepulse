@@ -1,12 +1,12 @@
-# **EdgePulse** 
-## **Hybrid Memory & Diagnostics Toolkit for Edge AI/ML, IoT, Robotics, and Drones**
-
-**Version:** 1.0     
-**Category:** Edge Computing · Raspberry Pi · AI/ML · Robotics · IoT · Drones    
+<img width="1528" height="600" alt="Banner" src="https://github.com/user-attachments/assets/919aef7f-b5d7-4802-aca5-123bf2be3742" />
 
 ---
+<div align="center">
+  <h2><strong>Category:</strong> Edge Computing · Raspberry Pi · AI/ML · Robotics · IoT · Drones</h2>
+</div>
+<br>
 
-## Overview
+## About the Project
 
 EdgePulse is a production-ready hybrid memory optimization and diagnostics framework designed for Raspberry Pi and similar single-board computers used in demanding edge workloads. I engineered this toolkit after repeatedly facing memory saturation, CPU throttling, thermal-induced performance drops, and insufficient system visibility during real deployments across AI/ML inference pipelines, IoT sensor gateways, robotics control systems, and drone telemetry/video nodes.
 
@@ -282,6 +282,7 @@ Released under the MIT License.
 Refer to `LICENSE` for details.
 
 ---
+
 
 
 
