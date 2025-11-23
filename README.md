@@ -1,8 +1,7 @@
 # **EdgePulse** 
 ## **Hybrid Memory & Diagnostics Toolkit for Edge AI/ML, IoT, Robotics, and Drones**
 
-**Version:** 1.0   
-**Author:** Prince Kumar  
+**Version:** 1.0     
 **Category:** Edge Computing · Raspberry Pi · AI/ML · Robotics · IoT · Drones    
 
 ---
@@ -283,6 +282,7 @@ Released under the MIT License.
 Refer to `LICENSE` for details.
 
 ---
+
 
 
 
