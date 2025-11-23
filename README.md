@@ -72,7 +72,7 @@ All configuration modifications are backed up with versioned suffixes.
 
 ---
 
-# **Performance Results (Included in results/)**
+# **Performance Results**
 
 All performance comparison graphs are available in the **results/** folder.
 The tables below summarize real-world measured improvements before and after applying EdgePulse on Raspberry Pi 3B+, Pi 4, and Pi 5.
@@ -282,6 +282,7 @@ Released under the MIT License.
 Refer to `LICENSE` for details.
 
 ---
+
 
 
 
